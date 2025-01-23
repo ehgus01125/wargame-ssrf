@@ -5,7 +5,7 @@ app = Flask(__name__)
 app.jinja_env.autoescape = False
 
 def filter_url(a):
-   black = ['127.0.0.1', 'localhost']
+   black = ['127.0.0.1', 'localhost', '0.0.0.0']
    for keyword in black:
        if keyword in a.lower():
            return False
@@ -13,8 +13,9 @@ def filter_url(a):
 
 @app.route('/')
 def index():
-   return '<p style="margin: 0">hello<a href="/submit">Click to go to /submit</a></p>'
+   return '<p style="margin: 0">hello <a href="/submit">Click /submit</a></p>'
 
+@app.route('/submit')
 def submit():
    a = request.args.get('a')
    if not a:
